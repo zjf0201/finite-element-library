@@ -1,21 +1,19 @@
-
-    PROGRAM LJR_CSEM
-    !主程序
-     use  lapack95
-     IMPLICIT NONE
-     INTEGER i,j,int1,int2
-     real(8) t1,t2,y0
-     CHARACTER*200 Netfile,Net_num
-     !****read**********************************
+ PROGRAM VFEM_Modelreduction
+    IMPLICIT NONE
+    INTEGER NS,WE,SX,I,J,N,int1,int2
+    call readfile();
  
-    
-  call system_clock(int1)  
-          CALL READNET()
-          CALL Allocate1() 
-          CALL CAL_SPACE_FILED()
-  
+    call read_flag_XYZ();
+    call allocate1();
+    CALL GET_PP()
+    PRINT*,'网格剖分。。。'
+    CALL GRID()
+    call measure()
+    PRINT*,'开始计算。。。'
+    call system_clock(int1)
+    CALL CACULATE_EM()
+     
    call system_clock(int2)
     
      print*,(int2-int1)/10000
-    call system('pause')
-    end program
+    ENDPROGRAM
